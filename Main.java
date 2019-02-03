@@ -22,7 +22,7 @@ public class Main {
                 System.out.println("Make your move, player one!");
                 Scanner in = new Scanner(System.in);
                 move = in.nextInt();
-            } while (!field.makeMove(move / 3, move % 3, playerOne));
+            } while (!field.makeMove(move / boardSize, move % boardSize, playerOne));
             if(field.isGameOver()) {
                 System.out.println("Player one WINS");
                 break; // out of main loop
@@ -32,7 +32,7 @@ public class Main {
                 System.out.println("Make your move, player two!");
                 Scanner in = new Scanner(System.in);
                 move = in.nextInt();
-            } while (!field.makeMove(move / 3, move % 3, playerTwo));
+            } while (!field.makeMove(move / boardSize, move % boardSize, playerTwo));
             if(field.isGameOver()) {
                 System.out.println("Player two WINS");
                 break; // out of main loop
@@ -44,8 +44,8 @@ public class Main {
                 e.printStackTrace();
             }
             do {
-                move = random.nextInt(9);
-            } while (!field.makeMove(move / 3, move % 3, playerThree));
+                move = random.nextInt(boardSize*boardSize);
+            } while (!field.makeMove(move / boardSize, move % boardSize, playerThree));
             if(field.isGameOver()) {
                 System.out.println("Computer WINS");
                 break; // out of main loop
@@ -57,7 +57,6 @@ public class Main {
     private void loadConfig() {
         Properties prop = new Properties();
         try {
-            //load a properties file from class path
             prop.load(Main.class.getClassLoader().getResourceAsStream("config.properties"));
 
             playerOne = prop.getProperty("playerOne").charAt(0);
